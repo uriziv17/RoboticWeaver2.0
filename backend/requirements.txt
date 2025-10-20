@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+pydantic
+aiohttp
+requests
+python-dotenv
+sqlalchemy
+alembic
+numpy
+scikit-image
+pygame
+celery
+redis
+imageio
+matplotlib
+# cv2-python

@@ -115,14 +115,10 @@ def find_darkest_strand(image: Image, possible_strands: list[Strand]) -> tuple[S
     :param possible_strands: A list of all the lines in the image to check.
     :return: The darkest strand in `possible_strands` relative to `image`.
     """
-    min_index = 0
-    min_mean = WHITE
-    for i, strand in enumerate(possible_strands):
-        curr_mean = np.mean(image[strand.rows, strand.cols])
-        if curr_mean < min_mean:
-            min_mean = curr_mean
-            min_index = i
-    return possible_strands[min_index], min_mean
+    # make sure this works
+    means = [np.mean(image[s.rows, s.cols]) for s in possible_strands]
+    min_index = int(np.argmin(means))
+    return possible_strands[min_index], means[min_index]
 
 
 class Loom(object):

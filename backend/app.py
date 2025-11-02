@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
-from tasks.celery import dummy_task
+from tasks.test import dummy_task
 import shutil
 import os
 from pydantic import BaseModel

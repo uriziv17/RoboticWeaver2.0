@@ -40,23 +40,30 @@ def write_nails_to_file(nails, path, image_height):
             y = image_height - y
             f.write(f"{x} {y}\n")
 
-
-def main():
-    image_path = sys.argv[1]
-    board_path = sys.argv[2]
-    name = sys.argv[3]
-    make_video = len(sys.argv) > 3 and sys.argv[4] == '-v'
+def weave_image(image_path, board_path, name):
     image = read_image(image_path)
     board = read_image(board_path)
     loom = Loom(image, board)
-    nails_sequence = loom.weave()
-    # write_nails_to_file(nail_sequence, image_path + "_sequence.ssc", len(image))
+    nails_sequence = loom.weave() # BAD
     save_image(loom.canvas, RESULTS_FOLDER + "/" + name + "_weave.png")
-    if make_video:
-        anim = Animator(nails_sequence, loom.canvas.shape, loom.nails)
-        anim.animate(make_video=True, video_name=name)
-    write_nails_to_file(nails_sequence, RESULTS_FOLDER + "/" + name + "_sequence.ssc", len(image_path))
+    return RESULTS_FOLDER + "/" + name + "_weave.png"
+
+# def main():
+#     image_path = sys.argv[1]
+#     board_path = sys.argv[2]
+#     name = sys.argv[3]
+#     make_video = len(sys.argv) > 3 and sys.argv[4] == '-v'
+#     image = read_image(image_path)
+#     board = read_image(board_path)
+#     loom = Loom(image, board)
+#     nails_sequence = loom.weave()
+#     # write_nails_to_file(nail_sequence, image_path + "_sequence.ssc", len(image))
+#     save_image(loom.canvas, RESULTS_FOLDER + "/" + name + "_weave.png")
+#     if make_video:
+#         anim = Animator(nails_sequence, loom.canvas.shape, loom.nails)
+#         anim.animate(make_video=True, video_name=name)
+#     write_nails_to_file(nails_sequence, RESULTS_FOLDER + "/" + name + "_sequence.ssc", len(image_path))
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

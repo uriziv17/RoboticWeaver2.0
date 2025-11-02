@@ -11,6 +11,7 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
+      - shared-storage:/shared
     depends_on:
       - redis
     env_file:
@@ -30,8 +31,12 @@ services:
     working_dir: /app
     volumes:
       - ./backend:/app
+      - shared-storage:/shared
     command: celery -A tasks.celery worker --loglevel=info
     depends_on:
       - redis
     env_file:
       - .env
+
+volumes:
+  shared-storage:

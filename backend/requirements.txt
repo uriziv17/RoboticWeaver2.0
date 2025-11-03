@@ -13,4 +13,5 @@ celery
 redis
 imageio
 matplotlib
+imageio
 # cv2-python

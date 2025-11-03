@@ -1,7 +1,8 @@
-from celery_app import celery_app
+from tasks.celery import celery_app
 import algorithm.main
-from backend.utils.storages import LocalFileStorage
+from utils.storages import LocalFileStorage
 import os
+import asyncio
 
 storage = LocalFileStorage()
 
@@ -10,6 +11,7 @@ storage = LocalFileStorage()
 async def weave_image(image_path, board_path, name):
     # result_path = algorithm.main.weave_image(image_path, board_path, name)
     try:
+        await asyncio.sleep(3)
         image = await storage.read(image_path)
         if image:
             return "zoo wee mama"

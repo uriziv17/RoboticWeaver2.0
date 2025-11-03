@@ -3,7 +3,7 @@ import numpy as np
 import skimage
 from matplotlib import pyplot as plt
 from skimage.feature import blob_log
-from main import read_image, plot_image
+from algorithm.main import read_image, plot_image
 
 cv2.namedWindow("preview")
 vc = cv2.VideoCapture(1)

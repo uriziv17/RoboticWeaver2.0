@@ -3,9 +3,9 @@ from skimage.io import imread
 from skimage.filters import gaussian
 from skimage.feature import blob_log
 import sys
-from animation import Animator
-from loom import Loom
-from names import *
+from algorithm.animation import Animator
+from algorithm.loom import Loom
+from algorithm.names import *
 
 
 def read_image(path: str) -> Image:

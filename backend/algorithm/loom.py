@@ -3,7 +3,7 @@ from skimage.feature import blob_log
 from skimage.transform import rescale
 from skimage.util import crop
 import matplotlib.pyplot as plt
-from names import *
+from algorithm.names import *
 
 
 class Strand(object):

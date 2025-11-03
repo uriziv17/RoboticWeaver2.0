@@ -6,7 +6,7 @@ from tasks.weave_tasks import weave_image
 import shutil
 import os
 from pydantic import BaseModel
-from backend.utils.storages import LocalFileStorage
+from utils.storages import LocalFileStorage
 
 app = FastAPI()
 

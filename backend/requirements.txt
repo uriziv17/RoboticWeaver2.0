@@ -14,4 +14,6 @@ redis
 imageio
 matplotlib
 imageio
+aiofiles
+python-multipart
 # cv2-python

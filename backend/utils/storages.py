@@ -22,6 +22,7 @@ class AsyncFileStorage(LocalFileStorage):
         file_path = super().get_path(file_name)
         async with aiofiles.open(file_path, "wb") as f:
             await f.write(data)
+        return file_path
 
     async def read(self, file_name: str) -> bytes:
         file_path = os.path.join(self.SHARED_DIR, file_name)
@@ -34,6 +35,7 @@ class SyncFileStorage(LocalFileStorage):
         file_path = super().get_path(file_name)
         with open(file_path, "wb") as f:
             f.write(data)
+        return file_path
 
     def read(self, file_name: str) -> bytes:
         file_path = os.path.join(self.SHARED_DIR, file_name)

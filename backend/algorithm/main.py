@@ -40,13 +40,13 @@ def write_nails_to_file(nails, path, image_height):
             y = image_height - y
             f.write(f"{x} {y}\n")
 
-def weave_image(image_path, board_path, name):
+def weave_image(image_path, board_path, id):
     image = read_image(image_path)
     board = read_image(board_path)
     loom = Loom(image, board)
     nails_sequence = loom.weave() # BAD
-    save_image(loom.canvas, RESULTS_FOLDER + "/" + name + "_weave.png")
-    return RESULTS_FOLDER + "/" + name + "_weave.png"
+    save_image(loom.canvas, RESULTS_FOLDER + "/" + id + "_weave.png")
+    return RESULTS_FOLDER + "/" + id + "_weave.png"
 
 # def main():
 #     image_path = sys.argv[1]

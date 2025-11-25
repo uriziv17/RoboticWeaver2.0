@@ -24,9 +24,9 @@ def dummy(payload: DurationRequest):
 
 
 @app.post("/process")
-def process(file: UploadFile = File(...)):
-    storage.save(file.filename, file.read())
-    task = weave_image.delay(file.filename)
+async def process(file: UploadFile = File(...)):
+    file_path = await storage.save(file.filename, await file.read())
+    task = weave_image.delay(file_path)
     return {"task_id": task.id}
 
 

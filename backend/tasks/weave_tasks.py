@@ -9,11 +9,9 @@ storage = SyncFileStorage()
 
 @celery_app.task(bind=True)
 def weave_image(self, image_path):
-    # result_path = algorithm.main.weave_image(image_path, board_path, name)
+    board_path = "./algorithm/Images/board_circle.png"
     try:
-        time.sleep(20)
-        image = storage.read(image_path)
-        if image:
-            return "zoo wee mama"
+        result_path = algorithm.main.weave_image(image_path, board_path, id=self.request.id)
+        return result_path
     except IOError as e:
         return f"Error reading image: {str(e)}"

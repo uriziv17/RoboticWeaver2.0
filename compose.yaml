@@ -3,8 +3,8 @@ version: "3.9"
 services:
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: fastapi-backend
     command: uvicorn app:app --host 0.0.0.0 --port 8000
     ports:
@@ -12,6 +12,23 @@ services:
     volumes:
       - ./backend:/app
       - shared-storage:/shared
+    user: "${UID}:${GID}"
+    depends_on:
+      - redis
+    env_file:
+      - .env
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: celery-worker
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - shared-storage:/shared
+    user: "${UID}:${GID}"
+    command: celery -A tasks.celery worker --loglevel=info
     depends_on:
       - redis
     env_file:
@@ -22,21 +39,6 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
-
-  worker:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-    container_name: celery-worker
-    working_dir: /app
-    volumes:
-      - ./backend:/app
-      - shared-storage:/shared
-    command: celery -A tasks.celery worker --loglevel=info
-    depends_on:
-      - redis
-    env_file:
-      - .env
 
 volumes:
   shared-storage:

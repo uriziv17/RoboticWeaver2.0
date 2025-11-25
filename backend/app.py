@@ -6,11 +6,11 @@ from tasks.weave_tasks import weave_image
 import shutil
 import os
 from pydantic import BaseModel
-from backend.utils.storages import LocalFileStorage
+from utils.storages import AsyncFileStorage
 
 app = FastAPI()
 
-storage = LocalFileStorage()
+storage = AsyncFileStorage()
 
 
 class DurationRequest(BaseModel):
@@ -24,8 +24,8 @@ def dummy(payload: DurationRequest):
 
 
 @app.post("/process")
-async def process(file: UploadFile = File(...)):
-    await storage.save(file.filename, await file.read())
+def process(file: UploadFile = File(...)):
+    storage.save(file.filename, file.read())
     task = weave_image.delay(file.filename)
     return {"task_id": task.id}
 

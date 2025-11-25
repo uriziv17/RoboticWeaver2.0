@@ -11,7 +11,7 @@ storage = SyncFileStorage()
 def weave_image(self, image_path):
     # result_path = algorithm.main.weave_image(image_path, board_path, name)
     try:
-        time.sleep(3)
+        time.sleep(20)
         image = storage.read(image_path)
         if image:
             return "zoo wee mama"

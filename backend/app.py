@@ -30,17 +30,17 @@ def process(file: UploadFile = File(...)):
     return {"task_id": task.id}
 
 
-# @app.get("/status/{task_id}")
-# async def get_status(task_id: str):
-#     task = process_image.AsyncResult(task_id)
-#     if task.state == "PENDING":
-#         return {"status": "pending"}
-#     elif task.state == "PROGRESS":
-#         return {"status": "processing", "progress": task.info.get("progress", 0)}
-#     elif task.state == "SUCCESS":
-#         return {"status": "done", "result": task.result}
-#     else:
-#         return {"status": task.state.lower()}
+@app.get("/status/{task_id}")
+async def get_status(task_id: str):
+    task = weave_image.AsyncResult(task_id)
+    if task.state == "PENDING":
+        return {"status": "pending"}
+    elif task.state == "PROGRESS":
+        return {"status": "processing", "progress": task.info.get("progress", 0)}
+    elif task.state == "SUCCESS":
+        return {"status": "done", "result": task.result}
+    else:
+        return {"status": task.state.lower()}
 
 # @app.get("/result/{task_id}")
 # async def get_result(task_id: str):

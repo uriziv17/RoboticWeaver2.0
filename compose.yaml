@@ -28,11 +28,13 @@ services:
       - ./backend:/app
       - shared-storage:/shared
     user: "${UID}:${GID}"
-    command: celery -A tasks.celery worker --loglevel=info
+    command: python -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m celery -A tasks.celery worker --loglevel=info
     depends_on:
       - redis
     env_file:
       - .env
+    ports:
+      - "5678:5678"
 
   redis:
     image: redis:7

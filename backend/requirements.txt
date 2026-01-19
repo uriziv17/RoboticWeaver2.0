@@ -16,3 +16,4 @@ matplotlib
 imageio
 aiofiles
 python-multipart
+debugpy

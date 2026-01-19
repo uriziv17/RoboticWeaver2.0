@@ -1,0 +1,14 @@
+{
+	"name": "Celery Worker Dev Container",
+	"dockerComposeFile": "../compose.yaml",
+	"service": "worker",
+	"workspaceFolder": "/app",
+
+	"shutdownAction": "stopCompose",
+
+	"extensions": ["ms-python.python", "ms-python.debugpy"],
+
+	"settings": {
+		"python.defaultInterpreterPath": "/usr/local/bin/python"
+	}
+}

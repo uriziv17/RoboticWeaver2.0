@@ -85,7 +85,7 @@ def find_nails_locations(board: Image, epsilon=7) -> list[Nail]:
     for nail in nails:
         good_nail = True
         for nn in new_nails:
-            if np.math.dist(nail, nn) < epsilon:
+            if np.linalg.norm(np.array(nail) - np.array(nn)) < epsilon:
                 # they are the same nail, probably
                 good_nail = False
                 break

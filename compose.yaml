@@ -28,13 +28,37 @@ services:
       - ./backend:/app
       - shared-storage:/shared
     user: "${UID}:${GID}"
-    command: python -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m celery -A tasks.celery worker --loglevel=info
+    command: celery -A tasks.celery worker --loglevel=info
     depends_on:
       - redis
     env_file:
       - .env
-    ports:
-      - "5678:5678"
+    profiles: ["normal"]
+
+  # DEBUG celery worker
+  worker-debug:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: celery-worker-debug
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - shared-storage:/shared
+    user: "${UID}:${GID}"
+    command: >
+      python -m debugpy
+      --listen 0.0.0.0:5678
+      --wait-for-client
+      -m celery
+      -A tasks.celery
+      worker
+      --loglevel=info
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    profiles: ["debug"]
 
   redis:
     image: redis:7

@@ -42,9 +42,9 @@ async def get_status(task_id: str):
     else:
         return {"status": task.state.lower()}
 
-# @app.get("/result/{task_id}")
-# async def get_result(task_id: str):
-#     task = process_image.AsyncResult(task_id)
-#     if task.state == "SUCCESS":
-#         return FileResponse(task.result["video_path"], media_type="video/mp4")
-#     return {"error": "Not ready"}
+@app.get("/result/{task_id}")
+async def get_result(task_id: str):
+    task = weave_image.AsyncResult(task_id)
+    if task.state == "SUCCESS":
+        return FileResponse(task.result, media_type="image/png")
+    return {"error": "Not ready"}

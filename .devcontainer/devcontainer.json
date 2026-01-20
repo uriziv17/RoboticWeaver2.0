@@ -1,9 +1,8 @@
 {
-	"name": "Celery Worker Dev Container",
+	"name": "Celery Worker (Debug)",
 	"dockerComposeFile": "../compose.yaml",
-	"service": "worker",
+	"service": "worker-debug",
 	"workspaceFolder": "/app",
-
 	"shutdownAction": "stopCompose",
 
 	"extensions": ["ms-python.python", "ms-python.debugpy"],
